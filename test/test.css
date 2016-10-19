@@ -1,0 +1,42 @@
+/*webkit-sassui-icon-text Start*/
+/*webkit-sassui-icon-text End*/
+.container {
+  padding: 10px;
+}
+
+.container:after {
+  clear: both;
+  content: "\200B";
+  display: block;
+  height: 0;
+}
+
+.test-webkit-sassui-icon-text {
+  font-size: 10px;
+  text-align: center;
+  float: left;
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.test-webkit-sassui-icon-text > i {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+}
+
+.test-webkit-sassui-icon-text > i > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.test-webkit-sassui-icon-text > span {
+  display: block;
+  color: #333;
+  font-size: 1.3em;
+}
+
+.test-webkit-sassui-icon-text + .test-webkit-sassui-icon-text {
+  border-left: 1px solid #eee;
+}
