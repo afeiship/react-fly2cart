@@ -1,5 +1,24 @@
 /*webkit-sassui-icon-text Start*/
 /*webkit-sassui-icon-text End*/
+html, body {
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+}
+
+h2 {
+  border-left: 3px solid #ccc;
+  padding-left: 10px;
+}
+
+h3 {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+}
+
 .container {
   padding: 10px;
 }
@@ -34,9 +53,50 @@
 .test-webkit-sassui-icon-text > span {
   display: block;
   color: #333;
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 .test-webkit-sassui-icon-text + .test-webkit-sassui-icon-text {
   border-left: 1px solid #eee;
+}
+
+.test-webkit-sassui-icon-text2 {
+  font-size: 10px;
+  margin-right: 20px;
+}
+
+.test-webkit-sassui-icon-text2 > i {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.test-webkit-sassui-icon-text2 > i > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.test-webkit-sassui-icon-text2 > span {
+  display: block;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.test-webkit-sassui-icon-text2 > i,
+.test-webkit-sassui-icon-text2 > span {
+  vertical-align: middle;
+}
+
+.test-webkit-sassui-icon-text2 > i {
+  margin-right: 2px;
+}
+
+.test-webkit-sassui-icon-text2 > i > img {
+  object-fit: contain;
+}
+
+.test-webkit-sassui-icon-text2 > span {
+  display: inline-block;
+  color: #666;
 }

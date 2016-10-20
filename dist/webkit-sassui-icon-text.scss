@@ -1,8 +1,6 @@
 /*webkit-sassui-icon-text Start*/
 @mixin webkit-sassui-icon-text($inWidth,$inHeight){
-  //Your mixin code goes here.
   font-size: 10px;
-  text-align: center;
   >i{
     display: inline-block;
     width:$inWidth;
@@ -16,7 +14,31 @@
   >span{
     display: block;
     color:#333;
-    font-size: 1.3em;
+    font-size: 1.2em;
+  }
+}
+
+@mixin webkit-sassui-icon-text-y($inWidth,$inHeight){
+  //Your mixin code goes here.
+  @include webkit-sassui-icon-text($inWidth,$inHeight);
+  text-align: center;
+}
+
+@mixin webkit-sassui-icon-text-x($inWidth,$inHeight,$inGap:2px){
+  @include webkit-sassui-icon-text($inWidth,$inHeight);
+  >i,
+  >span{
+    vertical-align: middle;
+  }
+  >i{
+    margin-right: $inGap;
+    >img{
+      object-fit: contain;
+    }
+  }
+  >span{
+    display: inline-block;
+    color:#666;
   }
 }
 /*webkit-sassui-icon-text End*/
