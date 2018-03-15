@@ -1,5 +1,17 @@
 /*webkit-sassui-icon-text Start*/
-.webkit-sassui-icon-text > * {
+.webkit-sassui-icon-text[data-align=top] > *, .webkit-sassui-icon-text_ > [data-align=top] > * {
+  vertical-align: top;
+}
+
+.webkit-sassui-icon-text[data-align=middle] > *, .webkit-sassui-icon-text_ > [data-align=middle] > * {
+  vertical-align: middle;
+}
+
+.webkit-sassui-icon-text[data-align=bottom] > *, .webkit-sassui-icon-text_ > [data-align=bottom] > * {
+  vertical-align: bottom;
+}
+
+.webkit-sassui-icon-text > *, .webkit-sassui-icon-text_ > * > * {
   vertical-align: middle;
 }
 
@@ -35,18 +47,18 @@ center span {
   color: #999;
 }
 
-center .webkit-sassui-icon-text {
+center .webkit-sassui-icon-text, center .webkit-sassui-icon-text_ > * {
   margin-right: 18px;
 }
 
 .h40 {
-  height: 40px;
+  height: 70px;
 }
 
 .h60 {
-  height: 60px;
+  height: 90px;
 }
 
 .h90 {
-  height: 90px;
+  height: 120px;
 }
