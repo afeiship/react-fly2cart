@@ -11,9 +11,9 @@
 
   //styles
   gulp.task('test',function() {
-    return gulp.src('test/test.scss')
+    return gulp.src('docs/test.scss')
       .pipe($.sass({outputStyle: 'expanded'}).on('error', $.sass.logError))
-      .pipe(gulp.dest('test'));
+      .pipe(gulp.dest('docs'));
   });
 
 

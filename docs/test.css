@@ -1,0 +1,56 @@
+/*webkit-sassui-icon-text Start*/
+.webkit-sassui-icon-text > * {
+  vertical-align: middle;
+}
+
+/*webkit-sassui-icon-text End*/
+html, body {
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+}
+
+h2 {
+  border-left: 3px solid #ccc;
+  padding-left: 10px;
+}
+
+h3 {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+center {
+  display: block;
+  border: 1px solid salmon;
+  margin: 40px auto;
+}
+
+center img {
+  width: 24px;
+  height: 24px;
+}
+
+center span {
+  font-size: 12px;
+  color: #999;
+}
+
+center .webkit-sassui-icon-text {
+  margin-right: 18px;
+}
+
+.h40 {
+  height: 40px;
+}
+
+.h60 {
+  height: 60px;
+}
+
+.h90 {
+  height: 90px;
+}

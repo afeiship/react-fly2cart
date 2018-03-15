@@ -8,6 +8,10 @@
     "email": "1290657123@qq.com"
   },
   "license": "MIT",
+  "scripts": {
+    "build": "gulp"
+  },
+  "main": "dist/webkit-sassui-icon-text.scss",
   "devDependencies": {
     "del": "^2.2.1",
     "gulp": "^3.9.1",
