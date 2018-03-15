@@ -6,4 +6,10 @@
   }
 }
 
+.webkit-sassui-icon-text_{
+  & > *{
+    @extend .webkit-sassui-icon-text;
+  }
+}
+
 /*webkit-sassui-icon-text End*/
