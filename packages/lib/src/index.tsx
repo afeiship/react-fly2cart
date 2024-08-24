@@ -42,13 +42,20 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   }
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const { createBall, ballClassName, onClick } = this.props;
+    const { onClick } = this.props;
+    e.preventDefault();
+    e.stopPropagation();
+    this.fly2cart();
+    onClick?.(e);
+  };
+
+  fly2cart = () => {
+    const { createBall, ballClassName } = this.props;
     const ball = createBall?.(ballClassName as string) as HTMLElement;
     const root = this.rootDom as HTMLElement;
     const rootBound = root.getBoundingClientRect();
     const cartBound = this.targetDom?.getBoundingClientRect()!;
     const ballBound = ball.getBoundingClientRect();
-
 
     const left = rootBound.left + rootBound.width / 2 - ball.offsetWidth / 2;
     const top = rootBound.top + rootBound.height / 2 - ball.offsetHeight / 2;
@@ -56,7 +63,6 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     const y = cartBound.top + cartBound.height / 2 - rootBound.top - ballBound.height / 2;
     ball.style.cssText = `--left: ${left}px; --top: ${top}px; --x: ${x}px; --y: ${y}px;`;
     ball.onanimationend = () => ball.remove();
-    onClick?.(e);
   };
 
   render() {
