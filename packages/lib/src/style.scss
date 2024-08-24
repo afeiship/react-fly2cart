@@ -28,6 +28,12 @@
 }
 
 @keyframes moveY {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
   100% {
     transform: translateY(var(--y, 0));
     opacity: 0.2;
