@@ -1,23 +1,20 @@
 {
-  "name": "webkit-sassui-icon-text",
-  "version": "0.0.0",
-  "description": "Webkit sass ui module for icon text.",
-  "homepage": "https://github.com/afeiship/webkit-sassui-icon-text",
-  "author": {
-    "name": "afei",
-    "email": "1290657123@qq.com"
-  },
-  "license": "MIT",
+  "name": "react-fly2cart",
+  "version": "1.0.0",
+  "description": "Fly to cart effect for react.",
+  "homepage": "https://js.work",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "gulp"
-  },
-  "main": "dist/webkit-sassui-icon-text.scss",
-  "devDependencies": {
-    "del": "^2.2.1",
-    "gulp": "^3.9.1",
-    "gulp-load-plugins": "^1.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "yargs": "^4.7.1"
+    "dev": "cd packages/example && yarn run dev",
+    "predocs": "rm -rf docs && node scripts/markdown.js",
+    "docs": "cd packages/example && yarn run build",
+    "postdocs": "cp -R packages/example/dist docs",
+    "preln:build": "yarn run docs",
+    "ln:build": "cd packages/lib && yarn run build",
+    "ln:publish": "cd packages/lib && yarn run release"
   }
 }
