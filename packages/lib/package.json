@@ -29,9 +29,9 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
+    "classnames": "*",
     "react": "*",
-    "react-dom": "*",
-    "classnames": "*"
+    "react-dom": "*"
   },
   "publishConfig": {
     "access": "public",
@@ -43,5 +43,9 @@
     "fly",
     "react",
     "virtual"
-  ]
+  ],
+  "dependencies": {
+    "@jswork/event-mitt": "^1.0.14",
+    "@jswork/harmony-events": "^1.2.2"
+  }
 }

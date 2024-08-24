@@ -1,5 +1,7 @@
 import cx from 'classnames';
 import React, { Component, HTMLAttributes } from 'react';
+import type { EventMittNamespace } from '@jswork/event-mitt';
+import { ReactHarmonyEvents } from '@jswork/harmony-events';
 
 const CLASS_NAME = 'react-fly2cart';
 const createBall = (className: string) => {
@@ -32,13 +34,17 @@ export type ReactFly2CartProps = {
 export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   static displayName = CLASS_NAME;
   static version = '__VERSION__';
+  static event: EventMittNamespace.EventMitt;
+  static events = ['fly2cart'];
   static defaultProps = {
+    name: '@',
     createBall,
     ballClassName: '',
     manually: false,
   };
 
   private rootDom: HTMLSpanElement | null = null;
+  private harmonyEvents: ReactHarmonyEvents | null = null;
 
   get targetDom() {
     const { target } = this.props;
@@ -47,13 +53,13 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     const { onClick, manually } = this.props;
-    if (manually) return;
     e.preventDefault();
     e.stopPropagation();
-    this.fly2cart();
+    if (!manually) this.fly2cart();
     onClick?.(e);
   };
 
+  /* ----- public eventBus methods ----- */
   fly2cart = () => {
     const { createBall, ballClassName } = this.props;
     const ball = createBall?.(ballClassName as string) as HTMLElement;
@@ -69,6 +75,14 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     ball.style.cssText = `--left: ${left}px; --top: ${top}px; --x: ${x}px; --y: ${y}px;`;
     ball.onanimationend = () => ball.remove();
   };
+
+  componentDidMount() {
+    this.harmonyEvents = ReactHarmonyEvents.create(this);
+  }
+
+  componentWillUnmount() {
+    this.harmonyEvents?.destroy();
+  }
 
   render() {
     const { className, children, createBall, ballClassName, target, onClick, manually, ...rest } = this.props;
