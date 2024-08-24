@@ -29,6 +29,10 @@ export type ReactFly2CartProps = {
    * Trigger the fly to cart action manually.
    */
   manually?: boolean;
+  /**
+   * The fly to cart event handler.
+   */
+  onFly2Cart?: () => void;
 } & HTMLAttributes<HTMLSpanElement>;
 
 export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
@@ -61,7 +65,7 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
 
   /* ----- public eventBus methods ----- */
   fly2cart = () => {
-    const { createBall, ballClassName } = this.props;
+    const { createBall, ballClassName, onFly2Cart } = this.props;
     const ball = createBall?.(ballClassName as string) as HTMLElement;
     const root = this.rootDom as HTMLElement;
     const rootBound = root.getBoundingClientRect();
@@ -73,7 +77,10 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     const x = cartBound.left - rootBound.left - ballBound.width / 2;
     const y = -(rootBound.top + rootBound.height / 2 - cartBound.top - cartBound.height / 2);
     ball.style.cssText = `--left: ${left}px; --top: ${top}px; --x: ${x}px; --y: ${y}px;`;
-    ball.onanimationend = () => ball.remove();
+    ball.onanimationend = () => {
+      ball.remove();
+      onFly2Cart?.();
+    };
   };
 
   componentDidMount() {
