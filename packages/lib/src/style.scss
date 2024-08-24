@@ -1,13 +1,21 @@
 .react-fly2cart {
   &-ball {
     --react-fly2cart-size: 20px;
+    --react-fly2cart-color: red;
     width: var(--react-fly2cart-size);
     height: var(--react-fly2cart-size);
     position: absolute;
     z-index: 9999;
     left: var(--left);
     top: var(--top);
-    animation: moveY 0.5s cubic-bezier(0.4, 1, 0.51, 1.24);
+
+    &[data-direction="top"] {
+      animation: moveY 0.5s cubic-bezier(0.4, 1, 0.5, 1.24);
+    }
+
+    &[data-direction="bottom"] {
+      animation: moveY 0.5s cubic-bezier(0.4, -0.8, 1, 1);
+    }
   }
 
   &-ball-inner {
@@ -15,7 +23,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: red;
+    background: var(--react-fly2cart-color);
     opacity: 1;
     animation: moveX 0.5s linear;
   }
@@ -36,6 +44,6 @@
   }
   100% {
     transform: translateY(var(--y, 0));
-    opacity: 0.2;
+    opacity: 0.1;
   }
 }

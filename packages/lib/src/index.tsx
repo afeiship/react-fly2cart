@@ -4,10 +4,11 @@ import type { EventMittNamespace } from '@jswork/event-mitt';
 import { ReactHarmonyEvents } from '@jswork/harmony-events';
 
 const CLASS_NAME = 'react-fly2cart';
-const createBall = (className: string) => {
+const createBall = (className: string, direction: 'top' | 'bottom') => {
   const ball = document.createElement('div');
   ball.className = cx(className, 'react-fly2cart-ball');
   ball.innerHTML = '<div class="react-fly2cart-ball-inner"></div>';
+  ball.setAttribute('data-direction', direction);
   document.body.appendChild(ball);
   return ball;
 };
@@ -16,7 +17,7 @@ export type ReactFly2CartProps = {
   /**
    * Create a ball element.
    */
-  createBall?: (className: string) => HTMLElement;
+  createBall?: (className: string, direction?: 'top' | 'bottom') => HTMLElement;
   /**
    * The ball class name.
    */
@@ -33,6 +34,10 @@ export type ReactFly2CartProps = {
    * The fly to cart event handler.
    */
   onFly2Cart?: () => void;
+  /**
+   * The cart direction.
+   */
+  direction?: 'top' | 'bottom';
 } & HTMLAttributes<HTMLSpanElement>;
 
 export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
@@ -45,6 +50,7 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     createBall,
     ballClassName: '',
     manually: false,
+    direction: 'top',
   };
 
   private rootDom: HTMLSpanElement | null = null;
@@ -65,8 +71,8 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
 
   /* ----- public eventBus methods ----- */
   fly2cart = () => {
-    const { createBall, ballClassName, onFly2Cart } = this.props;
-    const ball = createBall?.(ballClassName as string) as HTMLElement;
+    const { createBall, ballClassName, onFly2Cart, direction } = this.props;
+    const ball = createBall?.(ballClassName as string, direction) as HTMLElement;
     const root = this.rootDom as HTMLElement;
     const rootBound = root.getBoundingClientRect();
     const cartBound = this.targetDom?.getBoundingClientRect()!;
