@@ -6,6 +6,7 @@ import { useCommand } from '@jswork/react-fly2cart/src/main';
 function App() {
   const [num, setNum] = useState(0);
   const { fly2cart } = useCommand('minus');
+  const [disabled, setDisabled] = useState(false);
   return (
     <div className="m-10 p-4 shadow bg-gray-100 text-gray-800 h-100 hover:shadow-md transition-all">
       <div className="badge badge-warning absolute right-0 top-0 m-4">
@@ -22,16 +23,19 @@ function App() {
         name="minus"
         target=".the-cart"
         manually
-        className="abs top-50 right-100"
+        className="abs top-80 left-20"
         onClick={() => {
           setNum(num - 1);
+          setDisabled(true);
           setTimeout(() => {
-            console.log('fly2cart');
             fly2cart();
+            setDisabled(false);
           }, 1000);
         }}
       >
-        <button className="btn btn-sm btn-secondary">Buy immediately(-1)</button>
+        <button disabled={disabled} className="btn btn-sm btn-secondary">
+          {disabled ? 'Loading...' : 'Minus Async'}
+        </button>
       </ReactFly2Cart>
     </div>
   );
