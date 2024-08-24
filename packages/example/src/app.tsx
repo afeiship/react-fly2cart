@@ -10,7 +10,7 @@ function App() {
         Build Time: {BUILD_TIME}
       </div>
       <div
-        className="the-cart bg-green-400 size-16 rounded-full flex justify-center items-center corner-r right-10 abs">List:
+        className="the-cart bg-green-400 size-16 rounded-full flex justify-center items-center corner-r top-10 right-10 abs">List:
         {num}
       </div>
       <ReactFly2Cart target=".the-cart" className="abs top-100 left-100" onClick={() => setNum(num + 1)}>
