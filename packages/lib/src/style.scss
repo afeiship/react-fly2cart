@@ -10,7 +10,7 @@
     top: var(--top);
 
     &[data-direction="top"] {
-      animation: moveY 0.5s cubic-bezier(0.4, 1, 0.5, 1.24);
+      animation: moveY 0.5s cubic-bezier(0.4, 1, 0.5, 1.2);
     }
 
     &[data-direction="bottom"] {
