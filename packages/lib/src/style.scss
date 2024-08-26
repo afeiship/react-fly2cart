@@ -1,4 +1,8 @@
 .react-fly2cart {
+  &-hidden {
+    display: none;
+  }
+
   &-ball {
     --react-fly2cart-size: 20px;
     --react-fly2cart-color: red;

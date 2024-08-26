@@ -4,24 +4,8 @@ import type { EventMittNamespace } from '@jswork/event-mitt';
 import { ReactHarmonyEvents } from '@jswork/harmony-events';
 
 const CLASS_NAME = 'react-fly2cart';
-const createBall = (className: string, direction: 'top' | 'bottom') => {
-  const ball = document.createElement('div');
-  ball.className = cx(className, 'react-fly2cart-ball');
-  ball.innerHTML = '<div class="react-fly2cart-ball-inner"></div>';
-  ball.setAttribute('data-direction', direction);
-  document.body.appendChild(ball);
-  return ball;
-};
 
 export type ReactFly2CartProps = {
-  /**
-   * Create a ball element.
-   */
-  createBall?: (className: string, direction?: 'top' | 'bottom') => HTMLElement;
-  /**
-   * The ball class name.
-   */
-  ballClassName?: string;
   /**
    * The target element or selector.
    */
@@ -31,13 +15,17 @@ export type ReactFly2CartProps = {
    */
   manually?: boolean;
   /**
+   * The cart direction.
+   */
+  direction?: 'top' | 'bottom';
+  /**
    * The fly to cart event handler.
    */
   onFly2Cart?: () => void;
   /**
-   * The cart direction.
+   * The fly element.
    */
-  direction?: 'top' | 'bottom';
+  flyNode?: React.ReactNode;
 } & HTMLAttributes<HTMLSpanElement>;
 
 export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
@@ -47,18 +35,25 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   static events = ['fly2cart'];
   static defaultProps = {
     name: '@',
-    createBall,
-    ballClassName: '',
     manually: false,
-    direction: 'top',
+    direction: 'top'
   };
 
   private rootDom: HTMLSpanElement | null = null;
+  private hiddenBallDom: HTMLDivElement | null = null;
   private harmonyEvents: ReactHarmonyEvents | null = null;
 
   get targetDom() {
     const { target } = this.props;
     return typeof target === 'string' ? document.querySelector(target) : target;
+  }
+
+  get ballCloned() {
+    const ballDom = this.hiddenBallDom;
+    const ball = ballDom?.firstElementChild as HTMLDivElement;
+    const cloned = ball.cloneNode(true) as HTMLDivElement;
+    document.body.appendChild(cloned);
+    return cloned;
   }
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
@@ -71,8 +66,8 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
 
   /* ----- public eventBus methods ----- */
   fly2cart = () => {
-    const { createBall, ballClassName, onFly2Cart, direction } = this.props;
-    const ball = createBall?.(ballClassName as string, direction) as HTMLElement;
+    const { onFly2Cart } = this.props;
+    const ball = this.ballCloned;
     const root = this.rootDom as HTMLElement;
     const rootBound = root.getBoundingClientRect();
     const cartBound = this.targetDom?.getBoundingClientRect()!;
@@ -98,16 +93,24 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   }
 
   render() {
-    const { className, children, createBall, ballClassName, target, onClick, manually, ...rest } = this.props;
+    const { className, children, target, onClick, manually, direction, flyNode, ...rest } =
+      this.props;
     return (
-      <span
-        data-component={CLASS_NAME}
-        className={cx(CLASS_NAME, className)}
-        onClick={this.handleClick}
-        ref={(el) => (this.rootDom = el)}
-        {...rest}>
-        {children}
-      </span>
+      <>
+        <span
+          data-component={CLASS_NAME}
+          className={cx(CLASS_NAME, className)}
+          onClick={this.handleClick}
+          ref={(el) => (this.rootDom = el)}
+          {...rest}>
+          {children}
+        </span>
+        <div ref={(el) => (this.hiddenBallDom = el)} hidden className={`${CLASS_NAME}-hidden`}>
+          <div data-direction={direction} className={`${CLASS_NAME}-ball`}>
+            <div className="react-fly2cart-ball-inner">{flyNode}</div>
+          </div>
+        </div>
+      </>
     );
   }
 }
