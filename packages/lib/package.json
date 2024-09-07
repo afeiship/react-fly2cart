@@ -50,7 +50,7 @@
     "virtual"
   ],
   "dependencies": {
-    "@jswork/event-mitt": "^1.0.14",
-    "@jswork/harmony-events": "^1.2.2"
+    "@jswork/event-mitt": "^2.0.7",
+    "@jswork/harmony-events": "^1.2.6"
   }
 }
