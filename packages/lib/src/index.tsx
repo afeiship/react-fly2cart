@@ -72,6 +72,8 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     const rootBound = root.getBoundingClientRect();
     const cartBound = this.targetDom?.getBoundingClientRect()!;
 
+    if (!ball || !rootBound || !cartBound) return false;
+
     const left = rootBound.left + rootBound.width / 2 - ball.offsetWidth / 2;
     const top = rootBound.top + rootBound.height / 2 - ball.offsetHeight / 2;
     const x = -(rootBound.left + rootBound.width / 2 - cartBound.left - cartBound.width / 2);
@@ -81,6 +83,7 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
       ball.remove();
       onFly2Cart?.();
     };
+    return true;
   };
 
   componentDidMount() {
