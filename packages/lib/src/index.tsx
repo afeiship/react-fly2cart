@@ -26,6 +26,10 @@ export type ReactFly2CartProps = {
    * The fly element.
    */
   flyNode?: React.ReactNode;
+  /**
+   * If true, the component will not trigger the fly to cart event.
+   */
+  disabled?: boolean;
 } & HTMLAttributes<HTMLSpanElement>;
 
 export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
@@ -37,6 +41,7 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
     name: '@',
     manually: false,
     direction: 'top',
+    disabled: false,
   };
 
   private rootDom: HTMLSpanElement | null = null;
@@ -57,9 +62,10 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   }
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const { onClick, manually } = this.props;
+    const { onClick, manually, disabled } = this.props;
     e.preventDefault();
     e.stopPropagation();
+    if (disabled) return;
     if (!manually) this.fly2cart();
     onClick?.(e);
   };
@@ -95,7 +101,7 @@ export default class ReactFly2Cart extends Component<ReactFly2CartProps> {
   }
 
   render() {
-    const { className, children, target, onClick, manually, direction, flyNode, ...rest } =
+    const { className, children, target, onClick, manually, direction, flyNode, disabled, ...rest } =
       this.props;
     return (
       <>
